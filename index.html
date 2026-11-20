@@ -4,49 +4,42 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#101510">
-  <meta name="description" content="Une galerie verticale de photos de vélos et de cyclisme.">
+  <meta name="description" content="Photos et vidéos de vélo dans une galerie simple à parcourir.">
   <title>Les Photos du Cycliste</title>
   <style>
-    :root{color-scheme:dark;background:#101510;color:#f4f4ed;font-family:Arial,Helvetica,sans-serif}
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
-    body{margin:0;min-height:100vh;background:#101510}
-    main{width:min(100%,1100px);margin:0 auto;padding:0 18px}
-    .gallery{display:flex;flex-direction:column;gap:18px;padding:18px 0}
-    .photo{display:block;width:100%;height:auto;max-height:calc(100vh - 36px);object-fit:contain;cursor:zoom-in;background:#171e18;animation:appear .5s ease both}
-    .photo:nth-child(2){animation-delay:.06s}.photo:nth-child(3){animation-delay:.12s}.photo:nth-child(4){animation-delay:.18s}.photo:nth-child(5){animation-delay:.24s}
-    .viewer{position:fixed;inset:0;z-index:5;display:grid;place-items:center;padding:24px;background:rgba(5,8,6,.94);opacity:0;visibility:hidden;transition:opacity .2s,visibility .2s}
-    .viewer.open{opacity:1;visibility:visible}
-    .viewer img{display:block;max-width:100%;max-height:calc(100vh - 48px);object-fit:contain;transform:scale(.97);transition:transform .2s}
-    .viewer.open img{transform:scale(1)}
-    .close{position:absolute;top:16px;right:18px;width:44px;height:44px;border:1px solid #ffffff70;border-radius:50%;background:#141a15;color:#fff;font-size:27px;line-height:1;cursor:pointer}
-    @keyframes appear{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
-    @media(max-width:600px){main{padding:0 10px}.gallery{gap:10px;padding:10px 0}.photo{max-height:none}.viewer{padding:12px}.viewer img{max-height:calc(100vh - 24px)}}
-    @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;transition-duration:.01ms!important}}
+    :root{color-scheme:dark;background:#101510;color:#f4f4ed;font-family:Arial,Helvetica,sans-serif;--lime:#c8f169}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;min-height:100vh;background:#101510}
+    header{position:sticky;top:0;z-index:4;background:#101510ed;border-bottom:1px solid #ffffff20;backdrop-filter:blur(12px)}
+    nav{width:min(100%,1100px);min-height:64px;margin:auto;padding:10px 18px;display:flex;align-items:center;justify-content:space-between;gap:14px}
+    .brand{font-weight:700;letter-spacing:.04em;font-size:13px}.links{display:flex;gap:8px}.links a{padding:10px 14px;border:1px solid #ffffff30;border-radius:30px;font-size:13px;transition:.2s}.links a:hover{color:var(--lime);border-color:var(--lime)}
+    main{width:min(100%,1100px);margin:0 auto;padding:0 18px}section{scroll-margin-top:78px}.heading{padding:28px 0 10px}.heading h1,.heading h2{margin:0 0 8px;font-size:clamp(25px,4vw,36px);letter-spacing:-.04em}.heading p{margin:0;color:#a8aea5;font-size:14px;line-height:1.55}
+    .gallery{display:flex;flex-direction:column;gap:18px;padding:12px 0 38px}.photo{display:block;width:100%;height:auto;max-height:calc(100vh - 36px);object-fit:contain;cursor:zoom-in;background:#171e18;animation:appear .5s ease both}.photo:nth-child(2){animation-delay:.06s}.photo:nth-child(3){animation-delay:.12s}.photo:nth-child(4){animation-delay:.18s}.photo:nth-child(5){animation-delay:.24s}
+    .video-list{display:flex;flex-direction:column;gap:18px;padding:12px 0 48px}.video-card{display:block;position:relative;background:#171e18;border-radius:8px;overflow:hidden;text-decoration:none;color:inherit}.video-card img{display:block;width:100%;height:auto;max-height:calc(100vh - 130px);object-fit:contain;transition:filter .2s,transform .3s}.video-card:hover img{filter:brightness(.7);transform:scale(1.01)}.video-overlay{position:absolute;inset:auto 0 0;padding:48px 18px 18px;background:linear-gradient(transparent,#000c);pointer-events:none}.video-title{font-size:17px;font-weight:700}.video-hint{margin-top:5px;color:#ddd;font-size:12px}.play{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:58px;height:58px;border-radius:50%;display:grid;place-items:center;padding-left:4px;background:var(--lime);color:#15200f;font-size:22px;box-shadow:0 4px 28px #0009;transition:transform .2s}.video-card:hover .play{transform:translate(-50%,-50%) scale(1.1)}
+    .viewer{position:fixed;inset:0;z-index:10;display:grid;place-items:center;padding:24px;background:rgba(5,8,6,.94);opacity:0;visibility:hidden;transition:opacity .2s,visibility .2s}.viewer.open{opacity:1;visibility:visible}.viewer img{display:block;max-width:100%;max-height:calc(100vh - 48px);object-fit:contain;transform:scale(.97);transition:transform .2s}.viewer.open img{transform:scale(1)}.close{position:absolute;top:16px;right:18px;width:44px;height:44px;border:1px solid #ffffff70;border-radius:50%;background:#141a15;color:#fff;font-size:27px;line-height:1;cursor:pointer}
+    @keyframes appear{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}@media(max-width:600px){nav{padding:9px 10px}.brand{font-size:11px}.links a{padding:9px 11px;font-size:12px}main{padding:0 10px}.gallery,.video-list{gap:10px;padding-top:10px}.photo{max-height:none}.video-card img{max-height:none}.viewer{padding:12px}.viewer img{max-height:calc(100vh - 24px)}}@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;transition-duration:.01ms!important}}
   </style>
 </head>
 <body>
-  <main aria-label="Photos de vélo">
-    <div class="gallery">
+  <header><nav aria-label="Navigation principale"><a class="brand" href="#photos">LES PHOTOS DU CYCLISTE</a><div class="links"><a href="#photos">Photos</a><a href="#videos">Vidéos</a></div></nav></header>
+  <main>
+    <section id="photos" aria-labelledby="photos-title"><div class="heading"><h1 id="photos-title">Photos</h1></div><div class="gallery">
       <img class="photo" src="IMG_9122.JPG" alt="Vélo de route bleu et rose devant un mur de pierre" fetchpriority="high" decoding="async">
       <img class="photo" src="IMG_9123.JPG" alt="Vélo de route noir et violet devant une architecture blanche" loading="lazy" decoding="async">
       <img class="photo" src="IMG_9125.JPG" alt="Vélo de contre-la-montre devant un mur bleu" loading="lazy" decoding="async">
       <img class="photo" src="IMG_9127.JPG" alt="Vélo de course aérodynamique vert" loading="lazy" decoding="async">
       <img class="photo" src="IMG_9128.JPG" alt="Vélo de contre-la-montre bleu au bord de l'eau" loading="lazy" decoding="async">
-    </div>
+    </div></section>
+    <section id="videos" aria-labelledby="videos-title"><div class="heading"><h2 id="videos-title">Vidéos</h2><p>Choisissez une vidéo pour la rechercher sur YouTube. Les images sont des aperçus ; les fichiers vidéo ne sont pas encore dans le dépôt.</p></div><div class="video-list">
+      <a class="video-card" href="https://www.youtube.com/results?search_query=video+velo+2" target="_blank" rel="noopener" aria-label="Rechercher la vidéo 2 sur YouTube"><img src="VIDEO%202.png" alt="Aperçu de la vidéo 2" loading="lazy"><span class="play" aria-hidden="true">▶</span><span class="video-overlay"><span class="video-title">À vélo, sur la route</span><span class="video-hint">Ouvrir des vidéos similaires sur YouTube ↗</span></span></a>
+      <a class="video-card" href="https://www.youtube.com/results?search_query=video+velo+3" target="_blank" rel="noopener" aria-label="Rechercher la vidéo 3 sur YouTube"><img src="VIDEO%203.png" alt="Aperçu de la vidéo 3" loading="lazy"><span class="play" aria-hidden="true">▶</span><span class="video-overlay"><span class="video-title">L’aventure à vélo</span><span class="video-hint">Ouvrir des vidéos similaires sur YouTube ↗</span></span></a>
+    </div></section>
   </main>
-  <div class="viewer" id="viewer" role="dialog" aria-modal="true" aria-label="Photo agrandie">
-    <button class="close" type="button" aria-label="Fermer la photo">×</button>
-    <img alt="">
-  </div>
+  <div class="viewer" id="viewer" role="dialog" aria-modal="true" aria-label="Photo agrandie"><button class="close" type="button" aria-label="Fermer la photo">×</button><img alt=""></div>
   <script>
-    const viewer=document.getElementById('viewer');
-    const enlarged=viewer.querySelector('img');
+    const viewer=document.getElementById('viewer'),enlarged=viewer.querySelector('img');
     function closeViewer(){viewer.classList.remove('open');document.body.style.overflow='';setTimeout(()=>{enlarged.removeAttribute('src');enlarged.alt=''},200)}
     document.querySelectorAll('.photo').forEach(photo=>photo.addEventListener('click',()=>{enlarged.src=photo.src;enlarged.alt=photo.alt;viewer.classList.add('open');document.body.style.overflow='hidden'}));
-    viewer.querySelector('.close').addEventListener('click',closeViewer);
-    viewer.addEventListener('click',event=>{if(event.target===viewer)closeViewer()});
-    document.addEventListener('keydown',event=>{if(event.key==='Escape')closeViewer()});
+    viewer.querySelector('.close').addEventListener('click',closeViewer);viewer.addEventListener('click',event=>{if(event.target===viewer)closeViewer()});document.addEventListener('keydown',event=>{if(event.key==='Escape')closeViewer()});
   </script>
 </body>
 </html>
