@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f3f5f6">
+  <meta name="description" content="Bienvenue sur La Page du Cyclisme.">
+  <title>Bienvenue — La Page du Cyclisme</title>
+  <style>
+    :root{color-scheme:light;--ink:#172b3b;--muted:#66747e;--accent:#e99a37;--paper:#f3f5f6;font-family:Arial,Helvetica,sans-serif}
+    *{box-sizing:border-box}body{margin:0;min-height:100vh;background:var(--paper);color:var(--ink);display:grid;place-items:center}.welcome{width:min(680px,100%);padding:48px 24px;text-align:center}.welcome h1{margin:0;font-size:clamp(27px,5vw,42px);font-weight:500;letter-spacing:-.04em}.welcome h1 span{display:block;margin-top:8px;font-weight:800}.bike{display:block;width:min(410px,82vw);height:auto;margin:38px auto 34px}.bike .wheel{fill:none;stroke:var(--ink);stroke-width:5}.bike .frame{fill:none;stroke:var(--ink);stroke-width:5;stroke-linecap:round;stroke-linejoin:round}.bike .detail{fill:none;stroke:var(--accent);stroke-width:5;stroke-linecap:round;stroke-linejoin:round}.enter{width:46px;height:46px;margin:auto;border:1px solid #172b3b35;border-radius:50%;display:grid;place-items:center;color:var(--ink);font-size:23px;transition:background .2s,color .2s,transform .2s}.enter:hover{background:var(--ink);color:#fff;transform:translateY(3px)}.enter:focus-visible{outline:3px solid var(--accent);outline-offset:4px}.enter span{transform:translateY(-1px)}
+    @media(prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important}}
+  </style>
+</head>
+<body>
+  <main class="welcome">
+    <h1>Bienvenue sur le site<span>La Page du Cyclisme</span></h1>
+    <svg class="bike" viewBox="0 0 420 190" role="img" aria-label="Dessin minimaliste d’un vélo de route">
+      <circle class="wheel" cx="93" cy="125" r="53"/><circle class="wheel" cx="327" cy="125" r="53"/>
+      <path class="frame" d="M93 125 153 65l54 60H93l37-78h45m-36 0h37l36 78 39-60h32m-32 0 19-17m-96-1 16-1"/>
+      <path class="detail" d="m153 65 37-1m17 61 39-60m-93 0 17 60"/>
+    </svg>
+    <a class="enter" href="index.html#photos" aria-label="Accéder au reste du site"><span aria-hidden="true">↓</span></a>
+  </main>
+</body>
+</html>
